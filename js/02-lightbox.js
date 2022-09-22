@@ -4,29 +4,36 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 const gallery = document.querySelector('.gallery');
 
-const galleryMarkup = createGalleryMarkup(galleryItems);
-gallery.insertAdjacentHTML('afterbegin', galleryMarkup);
+const galleryCardMarkup = createGalleryCardMarkup(galleryItems);
+gallery.insertAdjacentHTML('afterbegin', galleryCardMarkup);
 
-function createGalleryMarkup(items) {
-  return items
-    .map(
-      ({ preview, original, description }) =>
-        `<li class="gallery__item">
-        <a class="gallery__link" href='${original}'>
-            <img
-                class="gallery__image"
-                src='${preview}' 
-                data-source='${original}' 
-                alt='${description}'
-                />
-        </a>
-    </li>`,
-    )
-    .join('');
+gallery.addEventListener('click', onModalGalleryClick);
+
+function createGalleryCardMarkup(galleryCards) {
+    return galleryCards.map(({ preview, original, description }) => {        
+      return ` <a class="gallery__item" href='${original}'>
+        <img class="gallery__image"
+        src='${preview}'
+        alt='${description}'
+        />
+      </a>`        
+    }).join('')  
 }
+
+function onModalGalleryClick(evt) {
+    evt.preventDefault();
+    if (evt.target === evt.currentTarget) { return };
+    console.log('evt.target', evt.target);
+};
+
+
+
 
 const lightbox = new SimpleLightbox('.gallery a', {
   spinner: true,
   captionsData: 'alt',
   captionDelay: 250,
+  navText: 'LR',
+  animationSpeed: 300,
+  disableRightClick: true,
 });

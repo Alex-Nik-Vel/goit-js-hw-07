@@ -17,7 +17,7 @@ function createGalleryCardMarkup(galleryCards) {
         <a class="gallery__link" href='${original}'>
             <img
                 class="gallery__image"
-                src='${preview} ' 
+                src='${preview}' 
                 data-source='${original}' 
                 alt='${description}'
                 />
@@ -43,7 +43,7 @@ function onModalGalleryClick(evt) {
     setTimeout(() => {
         instance.close(), 
         window.removeEventListener('keydown', onEscModalOpen)
-    }, 5000);
+    }, 7000);
 
 };
 
