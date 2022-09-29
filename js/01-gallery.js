@@ -36,7 +36,14 @@ function onModalGalleryClick(evt) {
     console.log('parent', parent.dataset.source);
 
     instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" alt='${evt.target.alt}'>`);
+    <img src="${evt.target.dataset.source}" alt='${evt.target.alt}'>`,{
+    onShow: () => {
+      window.addEventListener('keydown', onEscModalOpen);
+    },
+    onClose: (e) => {
+      window.removeEventListener('keydown', onEscModalOpen);
+    },
+  });
     
     instance.show();
     window.addEventListener('keydown', onEscModalOpen);
@@ -44,16 +51,20 @@ function onModalGalleryClick(evt) {
         instance.close(), 
         window.removeEventListener('keydown', onEscModalOpen)
     }, 7000);
-
+    // if (instance.close()) {
+    //     window.removeEventListener('keydown', onEscModalOpen)
+    // }
+    // console.log('instance.close()', instance.close());
+    
 };
 
 function onEscModalOpen(evt) {
-    
+    console.log('evt.key', evt.key);
     if (evt.code === 'Escape') {
         instance.close();
         window.removeEventListener('keydown', onEscModalOpen)
     };
-    // console.log('evt2', evt);
+    
 }
 
 
