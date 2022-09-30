@@ -40,7 +40,7 @@ function onModalGalleryClick(evt) {
     onShow: () => {
       window.addEventListener('keydown', onEscModalOpen);
     },
-    onClose: (e) => {
+    onClose: () => {
       window.removeEventListener('keydown', onEscModalOpen);
     },
   });
